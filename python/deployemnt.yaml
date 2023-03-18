@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python
+spec:
+  selector:
+    matchLabels:
+      run: python
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: python
+    spec:
+      containers:
+      - name: python
+        image: gcr.io/tribally-host-prj-s1/myapp
+        ports:
+        - containerPort: 8084
+        resources:
+          limits:
+            cpu: 500m
+          requests:
+            cpu: 200m
+------
+apiVersion: v1
+kind: Service
+metadata:
+  name: python
+  labels:
+    run: python
+spec:
+  ports:
+  - port: 80
+  selector:
+    run: python
