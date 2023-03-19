@@ -16,8 +16,7 @@ spec:
       - name: python
         image: gcr.io/tribally-host-prj-s1/myapp:latest
         ports:
-        - containerPort: 8084
-       
+        - containerPort: 8080       
 ---
 apiVersion: v1
 kind: Service
@@ -28,5 +27,6 @@ metadata:
 spec:
   ports:
   - port: 80
+  targetPort: 8080
   selector:
     run: python
